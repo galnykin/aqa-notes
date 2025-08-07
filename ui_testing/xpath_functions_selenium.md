@@ -372,11 +372,12 @@ public class XPathFunctionsExample {
 ---
 
 #### 8. Источники
-- BrowserStack: How to use XPath in Selenium?[](https://www.browserstack.com/guide/xpath-in-selenium)
-- HeadSpin: How to Use XPath in Selenium - A Complete Guide[](https://www.headspin.io/blog/using-xpath-in-selenium-effectively)
-- W3Schools: XPath Tutorial[](https://www.w3schools.com/xml/xpath_intro.asp)
-- Guru99: XPath in Selenium Tutorial[](https://www.guru99.com/xpath-selenium.html)
-- TestGrid: Dynamic XPath In Selenium[](https://testgrid.io/blog/dynamic-xpath-in-selenium/)
-- IPRoyal_proxies: XPath’s preceding-sibling axis
+
+- [BrowserStack: How to use XPath in Selenium?](https://www.browserstack.com/guide/xpath-in-selenium)
+- [HeadSpin: How to Use XPath in Selenium - A Complete Guide](https://www.headspin.io/blog/using-xpath-in-selenium-effectively)
+- [W3Schools: XPath Tutorial](https://www.w3schools.com/xml/xpath_intro.asp)
+- [Guru99: XPath in Selenium Tutorial](https://www.guru99.com/xpath-selenium.html)
+- [TestGrid: Dynamic XPath In Selenium](https://testgrid.io/blog/dynamic-xpath-in-selenium/)
+- [IPRoyal_proxies: XPath’s preceding-sibling axis](https://www.iproyal.com/proxies/xpath-preceding-sibling-axis/)
 
 ---
