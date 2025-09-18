@@ -400,4 +400,4 @@ public class TempoPizzaTest {
 - [mvnrepository: JUnit Jupiter](https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine)
 - [Selenium Waits](https://www.selenium.dev/documentation/webdriver/waits/)
 
-[**&#x2190; Назад к оглавлению**](README.md)
+[**&#x2190; Назад к оглавлению**](../README.md)
