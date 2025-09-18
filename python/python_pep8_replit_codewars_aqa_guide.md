@@ -424,3 +424,5 @@ def test_email_validation():
 - [pytest Documentation](https://docs.pytest.org/)
 
 ---
+
+[**&#x2190; Назад к оглавлению**](README.md)

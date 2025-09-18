@@ -325,4 +325,4 @@ public class UnicodeAqaTest {
 - [Oracle: Supplementary Characters](https://docs.oracle.com/javase/tutorial/i18n/text/supplementary.html)
 - [Selenium Documentation](https://www.selenium.dev/documentation/)
 
----
+[**&#x2190; Назад к оглавлению**](README.md)

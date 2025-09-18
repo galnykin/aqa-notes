@@ -243,3 +243,5 @@ describe('Dynamic React Test', () => {
 - [Thinkitive: Write Dynamic XPath for Test Automation with Selenium WebDriver](https://www.thinkitive.com/blog/write-dynamic-xpath-for-test-automation-with-selenium-webdriver-2/)
 
 ---
+
+[**&#x2190; Назад к оглавлению**](README.md)

@@ -321,3 +321,5 @@ pytest test_example.py
 - [pytest Documentation](https://docs.pytest.org/)
 
 ---
+
+[**&#x2190; Назад к оглавлению**](README.md)

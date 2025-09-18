@@ -284,3 +284,5 @@ public class StaticPage {
 - [BrowserStack: Page Object Model in Selenium](https://www.browserstack.com/guide/page-object-model-in-selenium)
 
 ---
+
+[**&#x2190; Назад к оглавлению**](README.md)

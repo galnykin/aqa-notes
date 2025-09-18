@@ -68,3 +68,5 @@ class CalculatorTest {
 ```
 
 -----
+
+[**&#x2190; Назад к оглавлению**](README.md)

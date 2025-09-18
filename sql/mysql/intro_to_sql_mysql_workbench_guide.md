@@ -224,3 +224,5 @@ SELECT * FROM users WHERE id = 1;
 - [MySQL Tutorial](https://www.mysqltutorial.org/)
 - [W3Schools SQL Tutorial](https://www.w3schools.com/sql/)
 - [Oracle MySQL Downloads](https://dev.mysql.com/downloads/)
+
+[**&#x2190; Назад к оглавлению**](README.md)

@@ -437,3 +437,5 @@ public class TempoPizzaTest {
 - [LambdaTest: Selenium Waits](https://www.lambdatest.com/learning-hub/selenium-waits)
 
 ---
+
+[**&#x2190; Назад к оглавлению**](README.md)

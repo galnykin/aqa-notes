@@ -323,3 +323,5 @@ test('Login Test', async ({ page }) => {
 - [Selenium Documentation](https://www.selenium.dev/documentation/)
 
 ---
+
+[**&#x2190; Назад к оглавлению**](README.md)

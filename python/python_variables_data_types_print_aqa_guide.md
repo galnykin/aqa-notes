@@ -440,3 +440,5 @@ driver.find_element(By.ID, "password").send_keys(test_data["password"])
 - [pytest Documentation](https://docs.pytest.org/)
 
 ---
+
+[**&#x2190; Назад к оглавлению**](README.md)

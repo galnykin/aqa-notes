@@ -496,3 +496,5 @@ describe('Login Test', () => {
 - [Selenium Documentation](https://www.selenium.dev/documentation/webdriver/locating_elements/)
 
 ---
+
+[**&#x2190; Назад к оглавлению**](README.md)

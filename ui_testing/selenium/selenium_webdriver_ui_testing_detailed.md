@@ -399,3 +399,5 @@ public class TempoPizzaTest {
 - [Baeldung: Selenium WebDriver](https://www.baeldung.com/java-selenium)
 - [mvnrepository: JUnit Jupiter](https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine)
 - [Selenium Waits](https://www.selenium.dev/documentation/webdriver/waits/)
+
+[**&#x2190; Назад к оглавлению**](README.md)
