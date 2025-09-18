@@ -474,4 +474,4 @@ public class LoggedTest {
 - [Baeldung: Java Annotations](https://www.baeldung.com/java-annotations)
 
 ---
-[**&#x2190; Назад к оглавлению**](README.md)
+[**&#x2190; Назад к оглавлению**](../README.md)
