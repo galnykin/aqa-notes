@@ -1,9 +1,9 @@
 # Оглавление
 
 ## Языки
-* [Java](./programming_languages/java/README.md)
-* [JavaScript](./programming_languages/js/README.md)
-* [Python](./programming_languages/python/README.md)
+* [Java](languages/java/README.md)
+* [JavaScript](languages/js/README.md)
+* [Python](languages/python/README.md)
 
 ---
 
