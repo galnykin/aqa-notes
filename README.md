@@ -24,9 +24,8 @@
 
 ---
 
-## Инструменты и практики
-* [Git](./tools_and_practices/git/README.md)
-* [SQL](./tools_and_practices/sql/README.md)
+## Инструменты
+* [Git](tools/git/README.md)
 
 ---
 
