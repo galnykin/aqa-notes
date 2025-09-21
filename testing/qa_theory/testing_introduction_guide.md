@@ -4,7 +4,7 @@
 
 ---
 
-## 1. Лекция 1: Введение в тестирование
+## 1. Введение в тестирование
 
 **Цель лекции**: Познакомить с основами тестирования ПО, его значением, целями и ролями в процессе разработки. Лекция закладывает фундамент для понимания роли тестировщика, особенно в контексте AQA, где тестирование часто связано с автоматизацией UI, API или баз данных.
 
@@ -33,7 +33,7 @@
 2. **Недопонимания даже при чётких требованиях**:
     - Разработчики и заказчики могут по-разному интерпретировать спецификации.
     - Пример: Требование "поле ввода принимает email" может быть реализовано без проверки формата.
-    - В AQA: Тест-кейсы с pytest или JUnit проверяют соответствие требованиям.
+    - В AQA: Тест-кейсы с TestNG или JUnit проверяют соответствие требованиям.
 
 3. **Пользователи ожидают стабильности и удобства**:
     - Пользователи требуют интуитивного UI и безошибочной работы.
@@ -48,10 +48,25 @@
 **Определение тестирования**:
 - Тестирование ПО — это процесс проверки соответствия между **реальным (actual)** и **ожидаемым (expected)** поведением программы.
 - Пример в AQA:
-  ```python
-  expected = "Welcome, John"
-  actual = driver.find_element(By.ID, "message").get_text()
-  assert actual == expected, "Сообщение не соответствует ожидаемому"
+
+  ```java
+  import org.openqa.selenium.By;
+  import org.openqa.selenium.WebDriver;
+  import org.openqa.selenium.chrome.ChromeDriver;
+  import org.junit.jupiter.api.Test;
+  import static org.junit.jupiter.api.Assertions.assertEquals;
+
+  public class TestDefinition {
+      @Test
+      void testWelcomeMessage() {
+          WebDriver driver = new ChromeDriver();
+          driver.get("https://example.com");
+          String expected = "Welcome, John";
+          String actual = driver.findElement(By.id("message")).getText();
+          assertEquals(expected, actual, "Сообщение не соответствует ожидаемому");
+          driver.quit();
+      }
+  }
   ```
 
 **Связь с другими темами**:
@@ -65,18 +80,34 @@
 QA охватывает множество специализаций, каждая из которых требует уникальных навыков:
 
 1. **Функциональное тестирование**:
-    - Проверка функциональности и UI.
-    - Роли: Software Tester, UI/UX Tester, Software Test Analyst.
-    - Пример: Проверка формы логина с корректными данными.
-    - В AQA: Автоматизация UI-тестов с Selenium:
-      ```python
-      driver.find_element(By.ID, "username").send_keys("John")
-      ```
+   - **Описание**: Проверяет функциональность приложения и UI, например, корректность работы форм.
+   - **Роли**: Software Tester, UI/UX Tester, Software Test Analyst.
+   - **Пример**: Проверка формы логина с корректными данными.
+   - **Применение в AQA**: Автоматизация UI-тестов с Selenium.
+
+     ```java
+     import org.openqa.selenium.By;
+     import org.openqa.selenium.WebDriver;
+     import org.openqa.selenium.chrome.ChromeDriver;
+     import org.junit.jupiter.api.Test;
+
+     public class FunctionalTest {
+         @Test
+         void testLoginForm() {
+             WebDriver driver = new ChromeDriver();
+             driver.get("https://example.com/login");
+             driver.findElement(By.id("username")).sendKeys("John");
+             driver.findElement(By.id("password")).sendKeys("pass123");
+             driver.findElement(By.id("submit")).click();
+             driver.quit();
+         }
+     }
+     ```
 
 2. **Автоматизированное тестирование**:
     - Автоматизация тестов для повышения эффективности.
     - Роли: Automation Test Engineer, SDET (Software Development Engineer in Test).
-    - Пример: Написание тестов с pytest и Selenium.
+    - Пример: Написание тестов с TestNG и Selenium.
     - В AQA: Основной фокус — автоматизация UI, API, БД.
 
 3. **Нефункциональное тестирование**:
@@ -102,13 +133,28 @@ QA охватывает множество специализаций, кажд�
     - В AQA: Автоматизация мобильных UI-тестов.
 
 6. **Тестирование API**:
-    - Проверка API-эндпоинтов.
-    - Роли: API Tester, API Automation Engineer.
-    - Пример: Тестирование REST API с Postman или requests:
-      ```python
-      response = requests.get("https://api.example.com/users")
-      assert response.status_code == 200
-      ```
+   - **Описание**: Проверяет API-эндпоинты на корректность ответов, статус-кодов и данных.
+   - **Роли**: API Tester, API Automation Engineer.
+   - **Пример**: Тестирование GET-запроса к REST API.
+   - **Применение в AQA**: Автоматизация с RestAssured (Java) или axios (JavaScript).
+   - **Пример на Java (RestAssured)**:
+     ```java
+     import io.restassured.RestAssured;
+     import io.restassured.response.Response;
+     import org.junit.jupiter.api.Test;
+     import static io.restassured.RestAssured.given;
+     import static org.junit.jupiter.api.Assertions.assertEquals;
+
+     public class ApiTest {
+         @Test
+         void testGetUsers() {
+             RestAssured.baseURI = "https://api.example.com";
+             Response response = given()
+                     .get("/users");
+             assertEquals(200, response.getStatusCode(), "Ожидался статус 200");
+         }
+     }
+     ```
 
 7. **Тестирование игр**:
     - Проверка игровых приложений.
@@ -137,13 +183,28 @@ QA охватывает множество специализаций, кажд�
     - Пример: Проверка спецификации формы логина.
 
 2. **Верификация требований (Verification)**:
-    - Проверка, что продукт соответствует спецификациям.
-    - Пример: Проверка, что поле ввода принимает только валидный email.
-    - В AQA: Автоматизация верификации:
-      ```python
-      driver.find_element(By.ID, "email").send_keys("invalid")
-      assert driver.find_element(By.ID, "error").is_displayed()
-      ```
+   - **Описание**: Проверяет, что продукт соответствует спецификациям (например, поле ввода принимает только валидный email).
+   - **Применение в AQA**: Автоматизация проверок через UI или API.
+   - **Пример на Java (Selenium)**:
+     ```java
+     import org.openqa.selenium.By;
+     import org.openqa.selenium.WebDriver;
+     import org.openqa.selenium.chrome.ChromeDriver;
+     import org.junit.jupiter.api.Test;
+     import static org.junit.jupiter.api.Assertions.assertTrue;
+
+     public class VerificationTest {
+         @Test
+         void testInvalidEmail() {
+             WebDriver driver = new ChromeDriver();
+             driver.get("https://example.com/register");
+             driver.findElement(By.id("email")).sendKeys("invalid");
+             driver.findElement(By.id("submit")).click();
+             assertTrue(driver.findElement(By.id("error")).isDisplayed(), "Ожидалась ошибка валидации");
+             driver.quit();
+         }
+     }
+     ```
 
 3. **Валидация ожиданий заказчиков (Validation)**:
     - Проверка, что продукт соответствует ожиданиям пользователей.
@@ -192,7 +253,7 @@ QA охватывает множество специализаций, кажд�
 - QA — проактивный процесс (предотвращение ошибок).
 - QC и тестирование — реактивные процессы (поиск и исправление дефектов).
 
-**Связь с AQA**: Автоматизация (Selenium, pytest) — часть QC, но способствует QA через раннее выявление ошибок.
+**Связь с AQA**: Автоматизация (Selenium, TestNG) — часть QC, но способствует QA через раннее выявление ошибок.
 
 ---
 
@@ -204,13 +265,28 @@ QA охватывает множество специализаций, кажд�
     - В AQA: Ошибки выявляются через тестирование кода.
 
 2. **Дефект (Defect/Bug)**:
-    - Несоответствие продукта спецификациям или ожиданиям.
-    - Пример: Кнопка логина не работает при пустом пароле.
-    - В AQA: Логируется в баг-трекере (Jira):
-      ```python
-      if not driver.find_element(By.ID, "submit").is_enabled():
-          print("Bug: Кнопка неактивна")
-      ```
+   - **Описание**: Несоответствие продукта спецификациям или ожиданиям.
+   - **Пример**: Кнопка логина неактивна при пустом пароле.
+   - **Применение в AQA**: Логирование дефектов в баг-трекере (например, Jira).
+   - **Пример на Java (Selenium)**:
+     ```java
+     import org.openqa.selenium.By;
+     import org.openqa.selenium.WebDriver;
+     import org.openqa.selenium.chrome.ChromeDriver;
+     import org.junit.jupiter.api.Test;
+
+     public class DefectTest {
+         @Test
+         void testLoginButton() {
+             WebDriver driver = new ChromeDriver();
+             driver.get("https://example.com/login");
+             if (!driver.findElement(By.id("submit")).isEnabled()) {
+                 System.out.println("Bug: Кнопка неактивна");
+             }
+             driver.quit();
+         }
+     }
+     ```
 
 3. **Отказ (Failure)**:
     - Дефект, обнаруженный пользователем после релиза.
@@ -218,35 +294,81 @@ QA охватывает множество специализаций, кажд�
     - В AQA: Цель — предотвратить отказы через тестирование.
 
 4. **Положительный тест (Positive Test)**:
-    - Проверка на корректных данных.
-    - Пример: Ввод валидного email и пароля.
-    - В AQA:
-      ```python
-      driver.find_element(By.ID, "email").send_keys("test@example.com")
-      driver.find_element(By.ID, "submit").click()
-      assert driver.find_element(By.ID, "message").get_text() == "Welcome"
-      ```
+   - **Описание**: Проверка на корректных данных (например, валидный email и пароль).
+   - **Пример**: Успешный логин с корректными данными.
+   - **Применение в AQA**: Автоматизация позитивных сценариев.
+   - **Пример на Java (Selenium)**:
+     ```java
+     import org.openqa.selenium.By;
+     import org.openqa.selenium.WebDriver;
+     import org.openqa.selenium.chrome.ChromeDriver;
+     import org.junit.jupiter.api.Test;
+     import static org.junit.jupiter.api.Assertions.assertEquals;
+
+     public class PositiveTest {
+         @Test
+         void testPositiveLogin() {
+             WebDriver driver = new ChromeDriver();
+             driver.get("https://example.com/login");
+             driver.findElement(By.id("email")).sendKeys("test@example.com");
+             driver.findElement(By.id("password")).sendKeys("pass123");
+             driver.findElement(By.id("submit")).click();
+             assertEquals("Welcome", driver.findElement(By.id("message")).getText(), "Ожидалось приветственное сообщение");
+             driver.quit();
+         }
+     }
+     ```
 
 5. **Отрицательный тест (Negative Test)**:
-    - Проверка на некорректных данных или действиях.
-    - Пример: Ввод неверного пароля.
-    - В AQA:
-      ```python
-      driver.find_element(By.ID, "password").send_keys("wrong")
-      assert driver.find_element(By.ID, "error").is_displayed()
-      ```
+   - **Описание**: Проверка на некорректных данных или действиях (например, неверный пароль).
+   - **Пример**: Появление ошибки при неверном пароле.
+   - **Применение в AQA**: Автоматизация негативных сценариев.
+   - **Пример на Java (Selenium)**:
+     ```java
+     import org.openqa.selenium.By;
+     import org.openqa.selenium.WebDriver;
+     import org.openqa.selenium.chrome.ChromeDriver;
+     import org.junit.jupiter.api.Test;
+     import static org.junit.jupiter.api.Assertions.assertTrue;
+
+     public class NegativeTest {
+         @Test
+         void testNegativeLogin() {
+             WebDriver driver = new ChromeDriver();
+             driver.get("https://example.com/login");
+             driver.findElement(By.id("password")).sendKeys("wrong");
+             driver.findElement(By.id("submit")).click();
+             assertTrue(driver.findElement(By.id("error")).isDisplayed(), "Ожидалась ошибка");
+             driver.quit();
+         }
+     }
+     ```
 
 6. **Тест-кейс (Test Case)**:
-    - Документированный тест с входными данными, условиями и ожидаемым результатом.
-    - Пример: "Ввести email: test@example.com, пароль: pass123, ожидать: Welcome".
-    - В AQA: Автоматизируется в pytest:
-      ```python
-      def test_login_success():
-          driver.find_element(By.ID, "email").send_keys("test@example.com")
-          driver.find_element(By.ID, "password").send_keys("pass123")
-          driver.find_element(By.ID, "submit").click()
-          assert driver.find_element(By.ID, "message").get_text() == "Welcome"
-      ```
+   - **Описание**: Документированный тест с входными данными, условиями и ожидаемым результатом.
+   - **Пример**: "Ввести email: test@example.com, пароль: pass123, ожидать: Welcome".
+   - **Применение в AQA**: Автоматизация тест-кейсов.
+   - **Пример на Java (JUnit 5)**:
+     ```java
+     import org.openqa.selenium.By;
+     import org.openqa.selenium.WebDriver;
+     import org.openqa.selenium.chrome.ChromeDriver;
+     import org.junit.jupiter.api.Test;
+     import static org.junit.jupiter.api.Assertions.assertEquals;
+
+     public class TestCaseExample {
+         @Test
+         void testLoginSuccess() {
+             WebDriver driver = new ChromeDriver();
+             driver.get("https://example.com/login");
+             driver.findElement(By.id("email")).sendKeys("test@example.com");
+             driver.findElement(By.id("password")).sendKeys("pass123");
+             driver.findElement(By.id("submit")).click();
+             assertEquals("Welcome", driver.findElement(By.id("message")).getText(), "Ожидалось приветственное сообщение");
+             driver.quit();
+         }
+     }
+     ```
 
 7. **Критерий прохождения (Pass Criteria)**:
     - Правило, определяющее успешность теста.
@@ -273,7 +395,7 @@ QA охватывает множество специализаций, кажд�
 - **Логи и скриншоты**: Сбор логов (например, в DevTools) и скриншотов для баг-репортов.
 - **Internet, HTTP/HTTPS**: Знание протоколов для API-тестирования.
 - **HTML**: Понимание структуры DOM для поиска локаторов.
-- **Командная строка**: Использование для запуска тестов (например, `pytest`).
+- **Командная строка**: Использование для запуска тестов.
 - **Web browsers & DevTools**: Проверка локаторов в Chrome DevTools (Ctrl+F для XPath).
 - **Excel**: Создание тест-кейсов и анализ данных.
 
@@ -282,7 +404,7 @@ QA охватывает множество специализаций, кажд�
 - **Инструменты коммуникации**: Slack, Microsoft Teams, Confluence.
 - **API-тестирование**: Postman, SoapUI, Swagger.
 - **Базы данных**: SQL (MySQL Workbench) для проверки данных.
-- **Автоматизация**: Selenium, pytest, Appium.
+- **Автоматизация**: Selenium, Appium.
 
 ### 7.4. Soft skills
 - **Общение**: Взаимодействие с разработчиками и менеджерами.
@@ -332,12 +454,36 @@ QA охватывает множество специализаций, кажд�
     - Пример: Негативные тесты обязательны для проверки граничных случаев.
 
 **Связь с AQA**:
-- Принципы реализуются в автоматизированных тестах:
-  ```python
-  def test_negative_login():
-      driver.find_element(By.ID, "password").send_keys("wrong")
-      assert driver.find_element(By.ID, "error").is_displayed()  # Негативный тест
-  ```
+   - **Принципы в AQA**: Верификация (соответствие требованиям) и валидация (правильность работы) автоматизируются.
+   - **Пример на Java (Selenium + RestAssured)**:
+     ```java
+     import io.restassured.RestAssured;
+     import org.openqa.selenium.By;
+     import org.openqa.selenium.WebDriver;
+     import org.openqa.selenium.chrome.ChromeDriver;
+     import org.junit.jupiter.api.Test;
+     import static io.restassured.RestAssured.given;
+     import static org.junit.jupiter.api.Assertions.assertTrue;
+     import static org.junit.jupiter.api.Assertions.assertEquals;
+   
+     public class AqaIntegrationTest {
+         @Test
+         void testNegativeLoginAndApi() {
+             // Негативный тест UI
+             WebDriver driver = new ChromeDriver();
+             driver.get("https://example.com/login");
+             driver.findElement(By.id("password")).sendKeys("wrong");
+             driver.findElement(By.id("submit")).click();
+             assertTrue(driver.findElement(By.id("error")).isDisplayed(), "Ожидалась ошибка");
+             driver.quit();
+   
+             // Верификация через API
+             Response response = given()
+                     .get("https://api.example.com/users/1");
+             assertEquals(200, response.getStatusCode(), "Ожидался статус 200");
+         }
+     }
+     ```
 
 ---
 
@@ -348,15 +494,30 @@ QA охватывает множество специализаций, кажд�
     - Пример: Проверка, что кнопка "Войти" работает корректно.
 
 2. **Что означает верификация и валидация?**
-    - **Верификация**: Проверка соответствия требованиям (правильно ли построен продукт?).
-        - Пример: Проверка, что форма логина соответствует спецификации.
-    - **Валидация**: Проверка соответствия ожиданиям пользователей (нужный ли продукт?).
-        - Пример: Проверка, что форма удобна для ввода данных.
-    - В AQA: Верификация и валидация автоматизируются:
-      ```python
-      assert driver.find_element(By.ID, "submit").is_enabled()  # Верификация
-      assert driver.find_element(By.ID, "message").get_text() == "Welcome"  # Валидация
-      ```
+   - **Изучайте теорию тестирования**: Ознакомьтесь с ISTQB Foundation Level Syllabus.
+   - **Практикуйтесь**:
+      - Пишите тест-кейсы для простых приложений (например, формы логина).
+   - **Пример на Java (JUnit 5)**:
+     ```java
+     import org.openqa.selenium.By;
+     import org.openqa.selenium.WebDriver;
+     import org.openqa.selenium.chrome.ChromeDriver;
+     import org.junit.jupiter.api.Test;
+     import static org.junit.jupiter.api.Assertions.assertEquals;
+
+     public class PracticeTest {
+         @Test
+         void testLoginPositive() {
+             WebDriver driver = new ChromeDriver();
+             driver.get("https://example.com/login");
+             driver.findElement(By.id("username")).sendKeys("testuser");
+             driver.findElement(By.id("password")).sendKeys("pass123");
+             driver.findElement(By.id("submit")).click();
+             assertEquals("Welcome", driver.findElement(By.id("message")).getText(), "Ожидалось приветственное сообщение");
+             driver.quit();
+         }
+     }
+     ```
 
 3. **Что такое контроль качества (QC) и чем он отличается от QA?**
     - **QC**: Проверка готового продукта (тестирование, выявление дефектов).
@@ -378,15 +539,28 @@ QA охватывает множество специализаций, кажд�
 - **Изучайте теорию тестирования**:
     - Ознакомьтесь с ISTQB Foundation Level Syllabus.
 - **Практикуйтесь**:
-    - Пишите тест-кейсы для простых приложений (например, формы логина).
-    - Пример:
-      ```python
-      def test_login_positive():
-          driver.find_element(By.ID, "username").send_keys("testuser")
-          driver.find_element(By.ID, "password").send_keys("pass123")
-          driver.find_element(By.ID, "submit").click()
-          assert driver.find_element(By.ID, "message").get_text() == "Welcome"
-      ```
+  - Пишите тест-кейсы для простых приложений (например, формы логина).
+  - **Пример на Java (JUnit 5, Selenium)**:
+    ```java
+    import org.openqa.selenium.By;
+    import org.openqa.selenium.WebDriver;
+    import org.openqa.selenium.chrome.ChromeDriver;
+    import org.junit.jupiter.api.Test;
+    import static org.junit.jupiter.api.Assertions.assertEquals;
+
+    public class PracticeTest {
+        @Test
+        void testLoginPositive() {
+            WebDriver driver = new ChromeDriver();
+            driver.get("https://example.com/login");
+            driver.findElement(By.id("username")).sendKeys("testuser");
+            driver.findElement(By.id("password")).sendKeys("pass123");
+            driver.findElement(By.id("submit")).click();
+            assertEquals("Welcome", driver.findElement(By.id("message")).getText(), "Ожидалось приветственное сообщение");
+            driver.quit();
+        }
+    }
+    ```
 - **Используйте инструменты**:
     - Jira для баг-трекинга.
     - Postman для API-тестов.
@@ -394,7 +568,7 @@ QA охватывает множество специализаций, кажд�
 - **Развивайте soft skills**:
     - Участвуйте в Slack-каналах (#qa_sql) и Telegram (#CatchTheOffer).
 - **Автоматизация**:
-    - Начните с Selenium и pytest для UI-тестов.
+    - Начните с Selenium и TestNG для UI-тестов.
 - **CI/CD**:
     - Интегрируйте тесты в GitHub Actions:
       ```yaml
@@ -405,14 +579,14 @@ QA охватывает множество специализаций, кажд�
           runs-on: ubuntu-latest
           steps:
             - uses: actions/checkout@v3
-            - name: Set up Python
-              uses: actions/setup-python@v4
+            - name: Set up JDK
+              uses: actions/setup-java@v3
               with:
-                python-version: '3.12'
+                java-version: '17'
             - name: Install dependencies
-              run: pip install pytest selenium
+              run: mvn install
             - name: Run tests
-              run: pytest
+              run: mvn
       ```
 
 ---
@@ -420,6 +594,7 @@ QA охватывает множество специализаций, кажд�
 ## 11. Источники
 - [ISTQB Foundation Level Syllabus](https://www.istqb.org/certifications/certified-tester-foundation-level)
 - [Selenium Documentation](https://www.selenium.dev/documentation/)
+- [Baeldung: JUnit 5 Tutorial](https://www.baeldung.com/junit-5)
 - [Postman Documentation](https://learning.postman.com/docs/)
 - [W3Schools SQL Tutorial](https://www.w3schools.com/sql/)
 
