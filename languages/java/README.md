@@ -1,7 +1,9 @@
 # Заметки по Java
 
 ## Основы
+* [Основы синтаксиса языка программирования Java](./basics/basics_java_syntax.md)
 * [Оператор `instanceof`](./basics/instanceof.md)
+* [Типы данных и операторы Java](./basics/java_data_types_and_operators.md)
 * [Литералы `null`, `true`, `false`](./basics/literals_null_true_false.md)
 * [Логические операторы и булева алгебра](./basics/logical_operators_boolean_algebra.md)
 * [Пакеты](./basics/package.md)
@@ -10,12 +12,16 @@
 * [Строки](./basics/strings/README.md)
 
 ## ООП
+* [Основы объектно-ориентированного программирования](./oop/java_oop_basics.md)
+* [Расширенные концепции ООП](./oop/java_oop_advanced.md)
 * [Руководство по AQA аннотациям Java](./oop/java_annotations_aqa_guide.md)
 * [Ключевое слово `new`](./oop/new.md)
 * [Ключевое слово `super`](./oop/super.md)
 * [Ключевое слово `native`](./oop/native.md)
 
 ## Инструменты
+* [Комплект разработчика на языке Java и основы работы с кодом](./tools/java_development_kit_basics.md)
+* [Работа с интегрированной средой разработки IntelliJ IDEA](./tools/intellij_project_structure_and_debugging.md)
 * [Импорт](./tools/import.md)
 * [Инкрементная компиляция в IntelliJ](./tools/incremental_compilation_intellij.md)
 * [Коды выхода IntelliJ](./tools/intellij_exit_codes.md)
