@@ -122,4 +122,4 @@
 - [Сервер приложений Apache Tomcat](https://tomcat.apache.org/)
 
 ---
-[**← Назад к оглавлению**](../README.md)
+[**← Назад к оглавлению**](README.md)
