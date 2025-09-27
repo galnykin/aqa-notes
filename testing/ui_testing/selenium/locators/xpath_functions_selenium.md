@@ -1,4 +1,4 @@
-### Часто используемые функции XPath в контексте Selenium и Java с использованием Developer Tools
+# Часто используемые функции XPath в контексте Selenium и Java с использованием Developer Tools
 
 XPath (XML Path Language) — мощный инструмент для навигации по структуре HTML-документов в Selenium WebDriver, особенно когда стандартные локаторы (ID, Name, ClassName) недостаточны. Функции XPath позволяют создавать гибкие и точные выражения для поиска элементов на веб-странице. В этом руководстве подробно описаны часто используемые функции XPath, их применение в Selenium с Java, а также использование инструментов разработчика (Developer Tools) для создания и проверки выражений XPath.
 
@@ -215,42 +215,7 @@ public class XPathFunctionsExample {
         driver.quit();
     }
 }
-<xaiArtifact artifact_id="597a4fab-b123-424e-9ce1-88dde5226eec" artifact_version_id="498537c8-b87e-4be5-943b-2086ea0d32b7" title="XPathFunctionsExample.java" contentType="text/java">
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-public class XPathFunctionsExample {
-    public static void main(String[] args) {
-        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://example.com");
-
-        // text(): Найти кнопку с текстом "Submit"
-        driver.findElement(By.xpath("//button[text()='Submit']")).click();
-
-        // contains(): Найти поле ввода с ID, содержащим "user"
-        driver.findElement(By.xpath("//input[contains(@id, 'user')]")).sendKeys("testuser");
-
-        // starts-with(): Найти элемент с классом, начинающимся на "btn"
-        driver.findElement(By.xpath("//*[starts-with(@class, 'btn')]")).click();
-
-        // normalize-space(): Найти div с текстом, игнорируя пробелы
-        driver.findElement(By.xpath("//div[normalize-space(text())='Welcome User']")).click();
-
-        // position(): Найти второй элемент в списке
-        driver.findElement(By.xpath("(//li)[2]")).click();
-
-        // and: Найти input с двумя атрибутами
-        driver.findElement(By.xpath("//input[@type='text' and @name='username']")).sendKeys("admin");
-
-        // following-sibling: Найти элемент, следующий за div
-        driver.findElement(By.xpath("//div[@class='header']/following-sibling::p")).click();
-
-        driver.quit();
-    }
-}
-</xaiArtifact>
 ```
 - **Примечание**: Замените `"path/to/chromedriver"` на актуальный путь к ChromeDriver.
 

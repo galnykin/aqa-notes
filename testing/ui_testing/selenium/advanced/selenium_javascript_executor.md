@@ -1,49 +1,51 @@
 # JavaScriptExecutor в Selenium: расширенные возможности взаимодействия с веб-страницей
 
-Автоматизация UI-тестирования с помощью Selenium WebDriver охватывает широкий спектр задач: от открытия страниц до проверки состояния элементов. Однако в ряде случаев стандартные методы WebDriver оказываются недостаточными — например, при работе с динамическими интерфейсами, нестандартными компонентами или скрытыми элементами. В таких ситуациях на помощь приходит `JavaScriptExecutor` — интерфейс, позволяющий напрямую выполнять JavaScript-код в контексте браузера.
+В UI-автоматизации часто встречаются ситуации, когда стандартных возможностей Selenium WebDriver недостаточно. Это бывает при работе с динамическими интерфейсами, кастомными компонентами (React, Angular, Vue), скрытыми или перекрытыми элементами. Для таких случаев используется `JavaScriptExecutor` — интерфейс, который позволяет выполнять JavaScript-код напрямую в браузере.
 
 ---
 
 ## 🧠 Что такое JavaScriptExecutor
 
-`JavaScriptExecutor` — это интерфейс, реализуемый большинством драйверов Selenium (например, `ChromeDriver`, `FirefoxDriver`). Он предоставляет метод `executeScript()`, с помощью которого можно запускать JavaScript-код в текущем окне браузера.
+`JavaScriptExecutor` реализуется большинством драйверов (`ChromeDriver`, `FirefoxDriver`) и предоставляет методы:
+
+* `executeScript(String script, Object... args)` — выполняет JavaScript синхронно
+* `executeAsyncScript(String script, Object... args)` — выполняет асинхронный JavaScript
+
+Пример:
 
 ```java
 JavascriptExecutor js = (JavascriptExecutor) driver;
 js.executeScript("alert('Hello from Selenium!');");
 ```
 
-Этот механизм позволяет обращаться к DOM напрямую, манипулировать элементами, вызывать события и получать значения, которые недоступны через стандартные методы WebDriver.
-
 ---
 
 ## 🔍 Когда использовать JavaScriptExecutor
 
-### 1. Элемент вне видимой области
-Иногда `click()` не срабатывает, если элемент находится за пределами видимой части страницы. В таких случаях можно прокрутить страницу:
+### 1. Элемент за пределами видимой области
 
 ```java
 js.executeScript("arguments[0].scrollIntoView(true);", element);
 ```
 
 ### 2. Элемент перекрыт другим
-Если элемент визуально перекрыт (например, всплывающим баннером), WebDriver может выбросить исключение. JavaScript позволяет обойти это ограничение:
 
 ```java
 js.executeScript("arguments[0].click();", element);
 ```
 
-### 3. Работа с нестандартными UI-компонентами
-Некоторые фреймворки (React, Angular, Vue) генерируют элементы динамически, и WebDriver не всегда успевает их "увидеть". JavaScript может получить доступ к ним напрямую.
+### 3. Динамические элементы (React, Angular)
 
-### 4. Получение и установка значений
+JavaScript напрямую обращается к DOM, минуя проблемы с ожиданиями.
+
+### 4. Работа с input-элементами
+
 ```java
-String value = (String) js.executeScript("return document.getElementById('username').value;");
 js.executeScript("document.getElementById('username').value='admin';");
+String value = (String) js.executeScript("return document.getElementById('username').value;");
 ```
 
-### 5. Вызов событий
-Можно вручную вызвать событие, например `blur`, `focus`, `change`:
+### 5. Генерация событий
 
 ```java
 js.executeScript("arguments[0].dispatchEvent(new Event('change'));", element);
@@ -51,67 +53,111 @@ js.executeScript("arguments[0].dispatchEvent(new Event('change'));", element);
 
 ---
 
-## 🧪 Примеры использования
+## 🧪 Расширенные примеры использования
 
 ### Прокрутка страницы
+
 ```java
 js.executeScript("window.scrollBy(0, 500);");
 ```
 
-### Получение текста из элемента
+### Получение innerText или innerHTML
+
 ```java
-String text = (String) js.executeScript("return arguments[0].textContent;", element);
+String text = (String) js.executeScript("return arguments[0].innerText;", element);
+String html = (String) js.executeScript("return arguments[0].innerHTML;", element);
 ```
 
 ### Проверка наличия элемента
+
 ```java
 Boolean exists = (Boolean) js.executeScript("return document.querySelector('#submit') !== null;");
 ```
 
-### Удаление элемента
+### Удаление или скрытие элемента
+
 ```java
 js.executeScript("document.querySelector('#popup').remove();");
+js.executeScript("arguments[0].style.display='none';", element);
 ```
 
-### Изменение стиля
+### Визуальное выделение элемента (debug)
+
 ```java
 js.executeScript("arguments[0].style.border='3px solid red';", element);
+```
+
+### Получение размеров окна или позиции элемента
+
+```java
+Long width = (Long) js.executeScript("return window.innerWidth;");
+Long height = (Long) js.executeScript("return window.innerHeight;");
 ```
 
 ---
 
 ## 🧱 Интеграция с Page Object
 
-`JavaScriptExecutor` можно обернуть в утилитарный класс или использовать внутри Page Object:
+Для удобства можно вынести методы в утилитарный класс:
 
 ```java
-public class BasePage {
-    protected WebDriver driver;
+public class JsHelper {
+    private WebDriver driver;
 
-    protected void clickViaJs(By locator) {
+    public JsHelper(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public void clickElement(By locator) {
         WebElement element = driver.findElement(locator);
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+    }
+
+    public void scrollToElement(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
     }
 }
 ```
 
-Это позволяет централизовать нестандартные действия и повысить читаемость тестов.
+Использование в Page Object:
+
+```java
+JsHelper jsHelper = new JsHelper(driver);
+jsHelper.clickElement(By.id("submit"));
+```
+
+---
+
+## ⚡ Асинхронные скрипты
+
+Метод `executeAsyncScript()` используется для работы с коллбэками:
+
+```java
+Long duration = (Long) js.executeAsyncScript(
+    "var callback = arguments[arguments.length - 1];" +
+    "setTimeout(function(){ callback(123); }, 2000);"
+);
+System.out.println("Result: " + duration);
+```
 
 ---
 
 ## ⚠️ Предостережения
 
-- **Не злоупотреблять**: использовать `JavaScriptExecutor` только при необходимости. Он может обойти ограничения, но также нарушить логику приложения.
-- **Отсутствие проверки состояния**: JavaScript не проверяет, доступен ли элемент для взаимодействия.
-- **Сложность отладки**: ошибки в скриптах не всегда очевидны и могут не выбрасывать исключения.
+* Использовать только при необходимости — стандартные методы WebDriver более надёжны
+* Ошибки JS не всегда бросают исключение в Java-коде
+* Возможна нестабильность тестов при частом использовании
+* Прямое вмешательство в DOM может отличаться от реального поведения пользователя
 
 ---
 
-## 🔗 Источники:
-- [Selenium WebDriver Documentation](https://www.selenium.dev/documentation/webdriver/)
-- [JavaScriptExecutor API](https://www.selenium.dev/selenium/docs/api/java/org/openqa/selenium/JavascriptExecutor.html)
-- [MDN Web Docs — JavaScript DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
-- [Guru99 — JavaScriptExecutor in Selenium](https://www.guru99.com/execute-javascript-selenium-webdriver.html)
+## 🔗 Источники
+
+* [Selenium WebDriver Documentation](https://www.selenium.dev/documentation/webdriver/)
+* [JavaScriptExecutor API](https://www.selenium.dev/selenium/docs/api/java/org/openqa/selenium/JavascriptExecutor.html)
+* [MDN Web Docs — JavaScript DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
+* [Guru99 — JavaScriptExecutor in Selenium](https://www.guru99.com/execute-javascript-selenium-webdriver.html)
 
 ---
+
 [**← Назад к оглавлению**](../../../../README.md)
