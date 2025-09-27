@@ -150,4 +150,4 @@ curl -X POST https://api.example.com/login \
 - [JsonPath.com](https://jsonpath.com/)
 
 ---
-[**← Назад к оглавлению**](../../README.md)
+[**← Назад к оглавлению**](README.md)
