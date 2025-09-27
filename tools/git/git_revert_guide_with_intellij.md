@@ -331,4 +331,4 @@ void testLogin() {
 - [Baeldung: Git Revert](https://www.baeldung.com/git-revert)
 
 ---
-[**&#x2190; Назад к оглавлению**](README.md)
+[**← Назад к оглавлению**](README.md)
