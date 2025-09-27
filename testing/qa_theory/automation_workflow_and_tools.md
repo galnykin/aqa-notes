@@ -132,4 +132,4 @@ Spring Boot чаще всего использует JAR с встроенным
 - [Selenide vs Selenium Comparison](https://selenide.org/)
 
 ---
-[**← Назад к оглавлению**](../../README.md)
+[**← Назад к оглавлению**](README.md)
