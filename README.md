@@ -1,31 +1,28 @@
 # Оглавление
 
-## Языки
-* [Java](languages/java/README.md)
-* [JavaScript](languages/js/README.md)
-* [Python](languages/python/README.md)
+## Языки программирования
+* [Java](./languages/java/README.md)
+* [JavaScript](./languages/js/README.md)
+* [Python](./languages/python/README.md)
 
 ---
 
 ## Тестирование
+### Автоматизация
+* [Тестирование UI](./testing/ui_testing/README.md)
+* [Тестирование API](./testing/api_testing/README.md)
 
-### Фреймворки
-* [JUnit](./testing/frameworks/junit/README.md)
-* [TestNG](./testing/frameworks/testng/README.md)
-
-### UI
-* [Selenium](./testing/ui_testing/selenium/README.md)
-
-### API
-* [REST Assured](./testing/api_testing/rest_assured/README.md)
-
-### Теория
+### Фреймворки и теория
+* [Фреймворки](./testing/frameworks/README.md)
 * [Теория QA](./testing/qa_theory/README.md)
 
 ---
 
-## Инструменты
-* [Git](tools/git/README.md)
+## Инструменты и практики
+* [Git](./tools/git/README.md)
+* [CI/CD](./tools/ci_cd/README.md)
+
+[//]: # (* [SQL]&#40;./tools/sql/README.md&#41;)
 
 ---
 
