@@ -134,4 +134,4 @@ console.log("Текущий URL:", window.location.href);
 - [Chrome DevTools Snippets](https://developer.chrome.com/docs/devtools/snippets/)
 
 ---
-[**← Назад к оглавлению**](../../../README.md)
+[**← Назад к оглавлению**](../README.md)

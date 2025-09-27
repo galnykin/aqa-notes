@@ -19,6 +19,15 @@
 * [Ключевое слово `super`](./oop/super.md)
 * [Ключевое слово `native`](./oop/native.md)
 
+## Теория
+* [Соглашения о коде в Java](./theory/java_code_conventions.md)
+* [Значения полей по умолчанию](./theory/java_default_field_values.md)
+* [Эквивалентность в Java](./theory/java_equivalence.md)
+* [Математические методы](./theory/java_math_methods.md)
+* [Управление памятью](./theory/java_memory_management.md)
+* [Приоритет операторов](./theory/java_operator_precedence.md)
+* [`System.out`](./theory/system_out.md)
+
 ## Инструменты
 * [Комплект разработчика на языке Java и основы работы с кодом](./tools/java_development_kit_basics.md)
 * [Работа с интегрированной средой разработки IntelliJ IDEA](./tools/intellij_project_structure_and_debugging.md)
@@ -35,15 +44,6 @@
 
 ## Данные и протоколы
 * [Практика работы с HTTP-запросами и JSON](./data_and_protocols/java_http_json_practice.md)
-
-## Теория
-* [Соглашения о коде в Java](./theory/java_code_conventions.md)
-* [Значения полей по умолчанию](./theory/java_default_field_values.md)
-* [Эквивалентность в Java](./theory/java_equivalence.md)
-* [Математические методы](./theory/java_math_methods.md)
-* [Управление памятью](./theory/java_memory_management.md)
-* [Приоритет операторов](./theory/java_operator_precedence.md)
-* [`System.out`](./theory/system_out.md)
 
 ## Собеседование
 * [Обзор ключевых тем для Java-разработчика](./interview/java_core_skills_overview.md)

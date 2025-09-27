@@ -135,4 +135,4 @@ public void loginTest() {
 - [Testing Pyramid Explained](https://www.thoughtworks.com/insights/blog/test-pyramid)
 
 ---
-[**← Назад к оглавлению**](../../../README.md)
+[**← Назад к оглавлению**](../README.md)
