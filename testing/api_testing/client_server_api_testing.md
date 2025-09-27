@@ -150,4 +150,4 @@ given()
 - [cURL Manual](https://curl.se/docs/manual.html)
 
 ---
-[**← Назад к оглавлению**](../../README.md)
+[**← Назад к оглавлению**](README.md)
