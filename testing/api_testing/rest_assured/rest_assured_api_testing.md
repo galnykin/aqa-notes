@@ -97,4 +97,4 @@ given()
 - [Postman vs REST Assured Comparison](https://rest-assured.io/#comparison)
 
 ---
-[**← Назад к оглавлению**](../../../README.md)
+[**← Назад к оглавлению**](README.md)

@@ -71,4 +71,4 @@ newman run my_collection.json
 - [Postman JavaScript API](https://learning.postman.com/docs/writing-scripts/script-references/postman-sandbox-api/)
 
 ---
-[**← Назад к оглавлению**](../../../README.md)
+[**← Назад к оглавлению**](../README.md)

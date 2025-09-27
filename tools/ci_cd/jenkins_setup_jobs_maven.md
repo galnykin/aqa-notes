@@ -87,10 +87,10 @@ clean test
 
 ## 🔗 Источники:
 
-- [📥 Скачать Jenkins (официальный сайт)](https://www.jenkins.io/download/)
-- [📚 Документация по cron-триггерам](https://www.jenkins.io/doc/book/pipeline/syntax/#triggers)
-- [🧰 Maven Integration Plugin](https://plugins.jenkins.io/maven-plugin/)
-- [🔧 Настройка Global Tool Configuration](https://www.jenkins.io/doc/book/managing/tools/)
+- [Скачать Jenkins (официальный сайт)](https://www.jenkins.io/download/)
+- [Документация по cron-триггерам](https://www.jenkins.io/doc/book/pipeline/syntax/#triggers)
+- [Maven Integration Plugin](https://plugins.jenkins.io/maven-plugin/)
+- [Настройка Global Tool Configuration](https://www.jenkins.io/doc/book/managing/tools/)
 
 ---
-[**← Назад к оглавлению**](../../README.md)
+[**← Назад к оглавлению**](README.md)

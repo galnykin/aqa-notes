@@ -149,4 +149,4 @@ Allure позволяет визуализировать результаты т
 - [Refactoring Guru — Design Patterns](https://refactoring.guru/ru/design-patterns)
 
 ---
-[**← Назад к оглавлению**](../../../README.md)
+[**← Назад к оглавлению**](../README.md)

@@ -6,4 +6,4 @@
 * [Практика интеграции фреймворка в CI/CD](framework_architecture/test_framework_ci_cd_integration.md)
 * [Практические знания автоматизатора: инструменты, процессы, сравнения](./automation_workflow_and_tools.md)
 
-[**&#x2190; Назад**](../../README.md)
+[**&#x2190; Назад к оглавлению**](../../README.md)

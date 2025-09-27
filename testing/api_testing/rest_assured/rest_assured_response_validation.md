@@ -87,4 +87,4 @@ REST Assured автоматически парсит JSON и позволяет 
 - [MDN HTTP Response Reference](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
 
 ---
-[**← Назад к оглавлению**](../../../README.md)
+[**← Назад к оглавлению**](README.md)

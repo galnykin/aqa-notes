@@ -49,4 +49,4 @@
 * [Обзор ключевых тем для Java-разработчика](./interview/java_core_skills_overview.md)
 * [Подготовка к собеседованию по Java](./interview/java_interview_preparation.md)
 
-[**&#x2190; Назад**](../../README.md)
+[**&#x2190; Назад к оглавлению**](../../README.md)

@@ -8,4 +8,4 @@
 * [Что такое Postman и зачем он нужен](tools/postman_overview_and_usage.md)
 * [REST Assured](./rest_assured/README.md)
 
-[**&#x2190; Назад**](../../README.md)
+[**&#x2190; Назад к оглавлению**](../../README.md)

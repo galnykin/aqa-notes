@@ -193,4 +193,4 @@ void tearDown() {
 - [XPath Syntax](https://www.w3schools.com/xml/xpath_syntax.asp)
 
 ---
-[**← Назад к оглавлению**](../../../README.md)
+[**← Назад к оглавлению**](../README.md)

@@ -98,4 +98,4 @@
 - [CI/CD Concepts](https://www.redhat.com/en/topics/devops/what-is-ci-cd)
 
 ---
-[**← Назад к оглавлению**](../../../README.md)
+[**← Назад к оглавлению**](../README.md)

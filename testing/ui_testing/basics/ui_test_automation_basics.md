@@ -170,4 +170,4 @@ void shouldLoginSuccessfully() {
 - [Тестовая страница для практики](https://svyatoslav.biz/testlab/wt/index.php)
 
 ---
-[**← Назад к оглавлению**](../../../README.md)
+[**← Назад к оглавлению**](../README.md)

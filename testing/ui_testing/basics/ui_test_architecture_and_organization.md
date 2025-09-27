@@ -156,6 +156,4 @@ public class LoginTest extends BaseTest {
 ```
 
 ---
-
----
-[**← Назад к оглавлению**](../../../README.md)
+[**← Назад к оглавлению**](../README.md)

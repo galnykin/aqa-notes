@@ -223,4 +223,4 @@ assertFalse(condition);  // проверка, что условие ложно
 - [Test Method Order in JUnit](https://junit.org/junit5/docs/current/user-guide/#writing-tests-test-order)
 
 ---
-[**← Назад к оглавлению**](../../README.md)
+[**← Назад к оглавлению**](../../../README.md)

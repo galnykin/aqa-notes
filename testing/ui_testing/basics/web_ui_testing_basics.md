@@ -121,4 +121,4 @@ assertTrue(message.isDisplayed());
 - [Selenium WebDriver Docs](https://www.selenium.dev/documentation/webdriver/)
 
 ---
-[**← Назад к оглавлению**](../../../README.md)
+[**← Назад к оглавлению**](../README.md)

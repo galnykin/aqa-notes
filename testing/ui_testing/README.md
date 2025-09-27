@@ -10,4 +10,4 @@
 ### Selenium
 * [Selenium](./selenium/README.md)
 
-[**&#x2190; Назад**](../../README.md)
+[**&#x2190; Назад к оглавлению**](../../README.md)

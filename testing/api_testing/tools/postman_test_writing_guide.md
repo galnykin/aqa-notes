@@ -96,4 +96,4 @@ pm.environment.set("authToken", jsonData.token);
 - [Newman CLI Tool](https://www.npmjs.com/package/newman)
 
 ---
-[**← Назад к оглавлению**](../../../README.md)
+[**← Назад к оглавлению**](../README.md)
