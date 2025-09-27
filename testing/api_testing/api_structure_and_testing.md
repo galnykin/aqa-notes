@@ -158,4 +158,4 @@ pm.test("Ответ содержит токен", function () {
 - [Swagger Documentation](https://swagger.io/docs/)
 
 ---
-[**← Назад к оглавлению**](../../README.md)
+[**← Назад к оглавлению**](README.md)
