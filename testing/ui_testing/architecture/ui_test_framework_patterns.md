@@ -1,3 +1,4 @@
+
 # Расширенные практики архитектуры UI-тестов на Java
 
 Современные UI-фреймворки на Java строятся не только на Page Object, но и на дополнительных архитектурных подходах, которые делают тесты более читаемыми, масштабируемыми и гибкими. Ниже представлены ключевые практики: работа с клавишами, мягкие проверки, разделение локаторов, шаги и действия, а также использование вспомогательных классов.
@@ -14,7 +15,34 @@ input.sendKeys("Pizza");
 input.sendKeys(Keys.RETURN); // имитация Enter
 ```
 
-Это особенно полезно при работе с формами, где кнопка отправки не имеет явного селектора или поведение зависит от клавиатуры.
+### Пример теста с TestNG
+
+```java
+public class SearchTest {
+
+    private WebDriver driver;
+
+    @BeforeMethod
+    public void setUp() {
+        driver = new ChromeDriver();
+        driver.get("https://example.com");
+    }
+
+    @Test
+    public void searchWithEnterKey() {
+        WebElement input = driver.findElement(By.id("search"));
+        input.sendKeys("Pizza");
+        input.sendKeys(Keys.RETURN);
+
+        Assert.assertTrue(driver.getTitle().contains("Pizza"));
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        driver.quit();
+    }
+}
+```
 
 ---
 
@@ -37,30 +65,88 @@ softly.assertThat(price).isGreaterThan(0);
 softly.assertAll(); // финальная проверка
 ```
 
-Это удобно при проверке нескольких условий в одном тесте, особенно при анализе списков или таблиц.
+### Пример теста с TestNG и SoftAssertions
+
+```java
+public class ProductPageTest {
+
+    private WebDriver driver;
+
+    @BeforeMethod
+    public void setUp() {
+        driver = new ChromeDriver();
+        driver.get("https://example.com/product");
+    }
+
+    @Test
+    public void checkProductDetails() {
+        String title = driver.findElement(By.id("title")).getText();
+        int price = Integer.parseInt(driver.findElement(By.id("price")).getText());
+
+        SoftAssertions softly = new SoftAssertions();
+        softly.assertThat(title).contains("Pizza");
+        softly.assertThat(price).isGreaterThan(0);
+        softly.assertAll();
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        driver.quit();
+    }
+}
+```
 
 ---
 
 ## 🧱 Page Object как архитектура
 
-Page Object — это основа UI-фреймворка. Он описывает:
+Page Object описывает элементы страницы и действия над ними:
 
-- элементы страницы (`By`, `WebElement`);
-- действия над ними (`click()`, `sendKeys()`);
-- переходы между страницами (`return new LoginPage()`).
-
-Пример:
 ```java
 public class LoginPage {
+    private final WebDriver driver;
+
     private final By inputLogin = By.id("username");
     private final By inputPassword = By.id("password");
     private final By buttonSubmit = By.id("submit");
+
+    public LoginPage(WebDriver driver) {
+        this.driver = driver;
+    }
 
     public HomePage login(String user, String pass) {
         driver.findElement(inputLogin).sendKeys(user);
         driver.findElement(inputPassword).sendKeys(pass);
         driver.findElement(buttonSubmit).click();
-        return new HomePage();
+        return new HomePage(driver);
+    }
+}
+```
+
+### Пример теста с TestNG
+
+```java
+public class LoginTest {
+
+    private WebDriver driver;
+    private LoginPage loginPage;
+
+    @BeforeMethod
+    public void setUp() {
+        driver = new ChromeDriver();
+        driver.get("https://example.com/login");
+        loginPage = new LoginPage(driver);
+    }
+
+    @Test(groups = {"smoke"})
+    public void validLoginTest() {
+        HomePage homePage = loginPage.login("admin", "1234");
+        assertThat(homePage.getWelcomeMessage()).contains("Welcome");
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        driver.quit();
     }
 }
 ```
@@ -69,7 +155,7 @@ public class LoginPage {
 
 ## 📦 Разделение локаторов: `HomePageLocators`
 
-Иногда локаторы выносят в отдельный класс, чтобы отделить структуру страницы от логики действий:
+Иногда локаторы выносят в отдельный класс:
 
 ```java
 public class HomePageLocators {
@@ -78,23 +164,39 @@ public class HomePageLocators {
 }
 ```
 
-Это удобно при работе с несколькими языками, динамическими атрибутами или переиспользуемыми компонентами.
+### Пример теста с TestNG и локаторами
+
+```java
+public class HomeTest {
+
+    private WebDriver driver;
+
+    @BeforeMethod
+    public void setUp() {
+        driver = new ChromeDriver();
+        driver.get("https://example.com");
+    }
+
+    @Test
+    public void searchFromHomePage() {
+        driver.findElement(HomePageLocators.SEARCH_FIELD).sendKeys("Pizza");
+        driver.findElement(HomePageLocators.SEARCH_FIELD).sendKeys(Keys.RETURN);
+
+        Assert.assertTrue(driver.getTitle().contains("Pizza"));
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        driver.quit();
+    }
+}
+```
 
 ---
 
 ## 🧩 Шаги и действия: `Steps`-классы
 
-Если на странице много полей, создают **комплексные методы** — шаги:
-
-```java
-public void fillLoginFormStep(String user, String pass) {
-    enterLogin(user);
-    enterPassword(pass);
-    clickSubmit();
-}
-```
-
-Для организации сценариев выносят действия в отдельный класс — например, `HomeSteps`:
+Для организации сценариев выносят действия в отдельный класс:
 
 ```java
 public class HomeSteps {
@@ -111,18 +213,52 @@ public class HomeSteps {
 }
 ```
 
-Это позволяет:
-- отделить логику теста от реализации;
-- переиспользовать шаги;
-- повысить читаемость тестов.
+### Пример теста с TestNG и шагами
+
+```java
+public class SearchStepsTest {
+
+    private WebDriver driver;
+    private HomeSteps homeSteps;
+
+    @BeforeMethod
+    public void setUp() {
+        driver = new ChromeDriver();
+        driver.get("https://example.com");
+        homeSteps = new HomeSteps(driver);
+    }
+
+    @Test(dataProvider = "queries")
+    public void searchWithSteps(String query) {
+        homeSteps.searchFor(query);
+        Assert.assertTrue(driver.getTitle().contains(query));
+    }
+
+    @DataProvider(name = "queries")
+    public Object[][] queries() {
+        return new Object[][] {
+            {"Pizza"}, {"Burger"}
+        };
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        driver.quit();
+    }
+}
+```
 
 ---
 
 ## 🔗 Источники:
-- [Selenium WebDriver Documentation](https://www.selenium.dev/documentation/)
-- [AssertJ Documentation](https://assertj.github.io/doc/)
-- [JUnit 5 User Guide](https://junit.org/junit5/docs/current/user-guide/)
-- [Design Patterns for Test Automation](https://refactoring.guru/ru/design-patterns)
+
+* [Selenium WebDriver Documentation](https://www.selenium.dev/documentation/)
+* [AssertJ Documentation](https://assertj.github.io/doc/)
+* [TestNG Documentation](https://testng.org/doc/)
+* [Design Patterns for Test Automation](https://refactoring.guru/ru/design-patterns)
 
 ---
+
 [**← Назад к оглавлению**](../../../README.md)
+
+---
