@@ -18,6 +18,8 @@
 * [Ключевое слово `new`](./oop/new.md)
 * [Ключевое слово `super`](./oop/super.md)
 * [Ключевое слово `native`](./oop/native.md)
+* [Структура и видимость DTO](./oop/java_dto_structure_and_visibility.md)
+* [Основы POJO](./oop/java_pojo_basics.md)
 
 ## Теория
 * [Соглашения о коде в Java](./theory/java_code_conventions.md)
@@ -27,6 +29,9 @@
 * [Управление памятью](./theory/java_memory_management.md)
 * [Приоритет операторов](./theory/java_operator_precedence.md)
 * [`System.out`](./theory/system_out.md)
+* [Стиль Java Beans и фреймворки](./theory/java_beans_style_and_frameworks.md)
+* [Поля vs. динамические вычисления](./theory/java_field_vs_dynamic_computation.md)
+* [Статические vs. расширяемые утилиты](./theory/java_static_vs_extendable_utils.md)
 
 ## Инструменты
 * [Комплект разработчика на языке Java и основы работы с кодом](./tools/java_development_kit_basics.md)
@@ -37,6 +42,8 @@
 * [Настройка IntelliJ IDEA для Java](./tools/intellij_idea_java_setup.md)
 * [Инструменты IntelliJ IDEA для Java](./tools/intellij_idea_java_tools.md)
 * [Практика работы с jsoup и log4j2](./tools/jsoup_log4j2_practice.md)
+* [Рефакторинг и эффективность в IntelliJ](./tools/intellij_refactoring_and_efficiency.md)
+
 
 ## Тестирование
 * [Структура тестов и современные возможности Java](./testing/java_test_structure_and_features.md)
