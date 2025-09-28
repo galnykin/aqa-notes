@@ -19,15 +19,6 @@
 * [Ключевое слово `super`](./oop/super.md)
 * [Ключевое слово `native`](./oop/native.md)
 
-## Инструменты
-* [Комплект разработчика на языке Java и основы работы с кодом](./tools/java_development_kit_basics.md)
-* [Работа с интегрированной средой разработки IntelliJ IDEA](./tools/intellij_project_structure_and_debugging.md)
-* [Импорт](./tools/import.md)
-* [Инкрементная компиляция в IntelliJ](./tools/incremental_compilation_intellij.md)
-* [Коды выхода IntelliJ](./tools/intellij_exit_codes.md)
-* [Настройка IntelliJ IDEA для Java](./tools/intellij_idea_java_setup.md)
-* [Инструменты IntelliJ IDEA для Java](./tools/intellij_idea_java_tools.md)
-
 ## Теория
 * [Соглашения о коде в Java](./theory/java_code_conventions.md)
 * [Значения полей по умолчанию](./theory/java_default_field_values.md)
@@ -37,7 +28,25 @@
 * [Приоритет операторов](./theory/java_operator_precedence.md)
 * [`System.out`](./theory/system_out.md)
 
+## Инструменты
+* [Комплект разработчика на языке Java и основы работы с кодом](./tools/java_development_kit_basics.md)
+* [Работа с интегрированной средой разработки IntelliJ IDEA](./tools/intellij_project_structure_and_debugging.md)
+* [Импорт](./tools/import.md)
+* [Инкрементная компиляция в IntelliJ](./tools/incremental_compilation_intellij.md)
+* [Коды выхода IntelliJ](./tools/intellij_exit_codes.md)
+* [Настройка IntelliJ IDEA для Java](./tools/intellij_idea_java_setup.md)
+* [Инструменты IntelliJ IDEA для Java](./tools/intellij_idea_java_tools.md)
+* [Практика работы с jsoup и log4j2](./tools/jsoup_log4j2_practice.md)
+
+## Тестирование
+* [Структура тестов и современные возможности Java](./testing/java_test_structure_and_features.md)
+* [Модульное тестирование и тестовые фреймворки](./testing/unit_testing_and_frameworks.md)
+
+## Данные и протоколы
+* [Практика работы с HTTP-запросами и JSON](./data_and_protocols/java_http_json_practice.md)
+
 ## Собеседование
+* [Обзор ключевых тем для Java-разработчика](./interview/java_core_skills_overview.md)
 * [Подготовка к собеседованию по Java](./interview/java_interview_preparation.md)
 
 [**&#x2190; Назад к оглавлению**](../../README.md)

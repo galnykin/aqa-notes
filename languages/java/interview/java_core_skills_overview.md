@@ -120,6 +120,5 @@
 - [Официальный сайт Gradle](https://gradle.org/)
 - [Официальная документация Git](https://git-scm.com/)
 - [Сервер приложений Apache Tomcat](https://tomcat.apache.org/)
-
 ---
-[**← Назад к оглавлению**](README.md)
+[**← Назад к оглавлению**](../README.md)
