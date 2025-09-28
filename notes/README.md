@@ -18,6 +18,7 @@
 * [Использование таск-трекера](./project_management/task_tracker_usage_in_aqa_project.md)
 * [Командные церемонии в AQA проекте](./project_management/team_ceremonies_in_aqa_project.md)
 * [Сбор обратной связи от команды в AQA](./project_management/team_feedback_collection_in_aqa.md)
+* [Пользовательские истории и варианты использования](./project_management/user_stories_and_use_cases.md)
 
 ## Разное
 * [Классификация математики](./miscellaneous/mathematics_classification.md)
