@@ -66,4 +66,4 @@ DELETE FROM orders WHERE status = 'cancelled';
 - [JDBC Guide — Oracle](https://docs.oracle.com/javase/tutorial/jdbc/)
 
 ---
-[**← Назад к оглавлению**](README.md)
+[**← Назад к оглавлению**](../README.md)

@@ -148,4 +148,4 @@ GitHub также поддерживает:
 - [Test Case Design Techniques](https://www.guru99.com/test-case.html)
 
 ---
-[**← Назад к оглавлению**](../README.md)
+[**← Назад к оглавлению**](../../README.md)

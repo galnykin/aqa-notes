@@ -79,4 +79,4 @@
 - [Integration Testing Guide — Baeldung](https://www.baeldung.com/integration-testing-in-spring)
 
 ---
-[**← Назад к оглавлению**](../README.md)
+[**← Назад к оглавлению**](README.md)

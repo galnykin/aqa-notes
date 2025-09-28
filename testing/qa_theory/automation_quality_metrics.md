@@ -78,4 +78,4 @@
 - [Allure Framework Docs](https://docs.qameta.io/allure/)
 
 ---
-[**← Назад к оглавлению**](../README.md)
+[**← Назад к оглавлению**](README.md)

@@ -259,6 +259,6 @@ public class SearchStepsTest {
 
 ---
 
-[**← Назад к оглавлению**](../../../README.md)
+[**← Назад к оглавлению**](../README.md)
 
 ---

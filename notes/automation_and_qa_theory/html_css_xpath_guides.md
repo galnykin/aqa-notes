@@ -115,4 +115,4 @@ XPath используется для навигации по элементам
 - **Практика**: Практикуйтесь на тренажерах, таких как CSS Dinner или Grid Garden, и создавайте свои проекты (например, через GitHub Pages).[](https://habr.com/ru/companies/pixel_study/articles/844166/)[](https://ru.hexlet.io/programs/html-css-basics-free)
 - **Дополнение**: После HTML и CSS изучите JavaScript для интерактивности сайтов, а для XPath — основы Selenium или веб-скрейпинга.[](https://dtf.ru/topraiting/3322437-luchshie-besplatnye-kursy-po-html-i-css-top-10-reiting-2024)
 
-[**&#x2190; Назад к оглавлению**](README.md)
+[**&#x2190; Назад к оглавлению**](../README.md)

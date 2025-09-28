@@ -91,4 +91,4 @@ pipeline {
 - [CI/CD for Test Automation — TestProject](https://blog.testproject.io/2020/03/09/ci-cd-for-test-automation/)
 
 ---
-[**← Назад к оглавлению**](../README.md)
+[**← Назад к оглавлению**](README.md)

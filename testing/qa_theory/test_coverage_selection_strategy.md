@@ -70,4 +70,4 @@
 - [Testing Pyramid — Martin Fowler](https://martinfowler.com/bliki/TestPyramid.html)
 
 ---
-[**← Назад к оглавлению**](../README.md)
+[**← Назад к оглавлению**](README.md)
