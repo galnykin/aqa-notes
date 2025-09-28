@@ -346,3 +346,5 @@ public class XPathFunctionsExample {
 - [IPRoyal_proxies: XPath’s preceding-sibling axis](https://www.iproyal.com/proxies/xpath-preceding-sibling-axis/)
 
 ---
+
+[**&#x2190; Назад к оглавлению**](../README.md)
