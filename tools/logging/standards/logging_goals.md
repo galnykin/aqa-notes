@@ -1,9 +1,5 @@
 # Цели логирования в проекте
 
-Логирование — это процесс записи событий, действий и состояний системы, который играет ключевую роль в разработке, тестировании и поддержке программного обеспечения. В контексте проекта логирование помогает разработчикам, тестировщикам и DevOps-инженерам отслеживать поведение приложения, диагностировать проблемы и принимать обоснованные решения. Эта статья описывает основные цели логирования в проекте, объясняя, почему оно необходимо и как способствует достижению качества и стабильности системы.
-
-## Основные цели логирования
-
 Логирование преследует несколько ключевых целей, каждая из которых решает конкретные задачи в жизненном цикле проекта:
 
 1. **Отладка и диагностика проблем**  
@@ -48,6 +44,424 @@
 - Статус-код и тело ответа.
 - Исключения при сбоях.
 
+
+### Отладка
+
+Логи помогают выявить и устранить ошибки в тестах, указывая на проблемные участки кода или взаимодействия с системой.
+
+- **Пример**: Логирование шагов теста и исключений в UI-тестах с Selenium WebDriver.
+- **Что логировать**: Шаги теста, входные данные, фактические результаты, стек вызовов при ошибках.
+
+**Пример кода** (JUnit 5):
+
+```java
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class DebugLogTest {
+    private static final Logger logger = LoggerFactory.getLogger(DebugLogTest.class);
+    private WebDriver driver;
+
+    @BeforeEach
+    void setUp() {
+        logger.info("Инициализация теста для отладки");
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+    }
+
+    @Test
+    void testLoginDebug() {
+        logger.debug("Открытие страницы логина");
+        driver.get("https://example.com/login");
+        try {
+            logger.debug("Проверка URL: {}", driver.getCurrentUrl());
+            assertThat(driver.getCurrentUrl()).contains("login");
+        } catch (Exception e) {
+            logger.error("Ошибка в тесте: {}", e.getMessage(), e);
+            throw e;
+        }
+    }
+
+    @AfterEach
+    void tearDown() {
+        logger.info("Завершение теста");
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+}
+```
+
+Лог:
+
+```
+2025-10-03 22:10:00 INFO  DebugLogTest - Инициализация теста для отладки
+2025-10-03 22:10:01 DEBUG DebugLogTest - Открытие страницы логина
+2025-10-03 22:10:01 DEBUG DebugLogTest - Проверка URL: https://example.com/login
+```
+
+### Аудит
+
+Логи для аудита фиксируют, кто, когда и что сделал, обеспечивая отслеживаемость действий.
+
+- **Пример**: Логирование с использованием MDC для добавления `userId` и `testId`.
+- **Что логировать**: Действия пользователя, контекст (например, `userId`), временные метки.
+
+**Пример кода с MDC**:
+
+```java
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
+
+public class AuditLogger {
+    private static final Logger logger = LoggerFactory.getLogger(AuditLogger.class);
+
+    public static void logAuditAction(String userId, String action, String details) {
+        MDC.put("userId", userId);
+        logger.info("Аудит: {} - {}", action, details);
+        MDC.clear();
+    }
+}
+```
+
+**Конфигурация Logback** (`logback.xml`):
+
+```xml
+<configuration>
+    <appender name="AUDIT_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/audit.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>logs/audit.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} [userId=%X{userId}] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <logger name="AuditLogger" level="info" additivity="false">
+        <appender-ref ref="AUDIT_FILE"/>
+    </logger>
+</configuration>
+```
+
+Лог:
+
+```
+2025-10-03 22:10:00 INFO  AuditLogger [userId=testUser] - Аудит: Вход в систему - Пользователь user
+```
+
+### Мониторинг
+
+Логи используются для отслеживания состояния тестов в реальном времени, особенно в CI/CD.
+
+- **Пример**: Логирование статуса API-запросов в тестах с RestAssured.
+- **Что логировать**: Статус выполнения тестов, производительность, ошибки.
+
+**Пример API-теста** (TestNG):
+
+```java
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.annotations.Test;
+
+import static io.restassured.RestAssured.given;
+import static org.testng.Assert.assertEquals;
+
+public class MonitorApiTest {
+    private static final Logger logger = LoggerFactory.getLogger(MonitorApiTest.class);
+
+    @Test
+    void testApiMonitor() {
+        logger.info("Мониторинг: Запуск API-теста");
+        RestAssured.baseURI = "https://api.example.com";
+
+        long startTime = System.currentTimeMillis();
+        Response response = given()
+                .when()
+                .get("/users/1")
+                .then()
+                .extract().response();
+
+        logger.info("Мониторинг: Статус ответа: {}, Время: {} мс", 
+                    response.getStatusCode(), System.currentTimeMillis() - startTime);
+        assertEquals(response.getStatusCode(), 200);
+    }
+}
+```
+
+Лог:
+
+```
+2025-10-03 22:10:00 INFO  MonitorApiTest - Мониторинг: Запуск API-теста
+2025-10-03 22:10:01 INFO  MonitorApiTest - Мониторинг: Статус ответа: 200, Время: 150 мс
+```
+
+### Аналитика
+
+Логи помогают анализировать поведение системы, выявлять закономерности и оптимизировать тесты.
+
+- **Пример**: Анализ частоты ошибок в UI-тестах.
+- **Что логировать**: Статистика выполнения тестов, метрики производительности, тренды ошибок.
+
+**Пример аналитики в CI**:
+
+```groovy
+stage('Analyze Logs') {
+    steps {
+        sh '''
+            echo "Анализ ошибок в логах"
+            grep -i "ERROR" logs/tests.log | wc -l > error_count.txt
+            echo "Найдено ошибок: $(cat error_count.txt)"
+        '''
+    }
+}
+```
+
+## Кому предназначены логи
+
+Логи создаются для разных аудиторий, каждая из которых использует их для своих задач.
+
+### Разработчики
+
+- **Цель**: Отладка кода и тестов, выявление причин ошибок.
+- **Что нужно**: Подробные логи с шагами теста, исключениями и стеком вызовов.
+- **Пример**: Логирование исключений в UI-тестах с Selenium.
+
+### QA-инженеры
+
+- **Цель**: Проверка корректности тестов, анализ результатов, воспроизведение ошибок.
+- **Что нужно**: Логи шагов теста, входных данных и результатов проверок.
+- **Пример**: Логирование с Allure для структурированных отчётов.
+
+**Пример с Allure**:
+
+```java
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
+import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class QaLogTest {
+    private static final Logger logger = LoggerFactory.getLogger(QaLogTest.class);
+
+    @Test
+    void testForQa() {
+        logStep("Проверка страницы логина");
+        Allure.addAttachment("Результат", "URL: https://example.com/login");
+    }
+
+    @Step("Шаг: {step}")
+    private void logStep(String step) {
+        logger.info("QA: {}", step);
+    }
+}
+```
+
+### DevOps
+
+- **Цель**: Мониторинг тестов в CI/CD, управление инфраструктурой.
+- **Что нужно**: Логи производительности, статусов тестов, интеграция с ELK или облаком.
+- **Пример**: Логирование в Logstash для анализа в Kibana.
+
+**Конфигурация Logback для Logstash**:
+
+```xml
+<configuration>
+    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>localhost:5000</destination>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+    </appender>
+    <root level="info">
+        <appender-ref ref="LOGSTASH"/>
+    </root>
+</configuration>
+```
+
+**Зависимость Maven**:
+
+```xml
+<dependency>
+    <groupId>net.logstash.logback</groupId>
+    <artifactId>logstash-logback-encoder</artifactId>
+    <version>7.4</version>
+</dependency>
+```
+
+### Специалисты по безопасности
+
+- **Цель**: Аудит действий, проверка на утечку PII или чувствительных данных.
+- **Что нужно**: Логи аудита с MDC, фильтрация паролей и токенов.
+- **Пример**: Использование фильтра для маскирования данных.
+
+**Пример фильтра**:
+
+```java
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.core.filter.Filter;
+import ch.qos.logback.core.spi.FilterReply;
+
+public class SecurityFilter extends Filter<ILoggingEvent> {
+    private static final String MASK = "****";
+
+    @Override
+    public FilterReply decide(ILoggingEvent event) {
+        String message = event.getFormattedMessage();
+        if (message.contains("password") || message.contains("token")) {
+            String maskedMessage = message.replaceAll("password=\\S+", "password=" + MASK)
+                                         .replaceAll("token=\\S+", "token=" + MASK);
+            ILoggingEvent newEvent = new ch.qos.logback.classic.spi.LoggingEvent(
+                event.getLoggerName(),
+                (ch.qos.logback.classic.Logger) event.getLoggerContextVO().getLoggerContext().getLogger(event.getLoggerName()),
+                event.getLevel(),
+                maskedMessage,
+                event.getThrowableProxy(),
+                event.getArgumentArray()
+            );
+            return FilterReply.NEUTRAL;
+        }
+        return FilterReply.NEUTRAL;
+    }
+}
+```
+
+**Обновление `logback.xml`**:
+
+```xml
+<configuration>
+    <turboFilter class="SecurityFilter"/>
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/tests.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>logs/tests.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <root level="info">
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>
+```
+
+## Лучшие практики и отладка
+
+### Отладка
+
+- **Для разработчиков**: Используйте уровень `DEBUG` для подробных логов, включайте стек вызовов.
+- **Инструменты**: В IntelliJ IDEA настройте точки останова в методах логирования для проверки сообщений.
+
+### Аудит
+
+- Включайте MDC с `userId` и `testId` для отслеживания действий.
+- Храните аудит-логи в отдельном файле (`audit.log`).
+
+### Мониторинг
+
+- Интегрируйте логи с ELK Stack или облачными сервисами (например, AWS CloudWatch).
+- Логируйте метрики производительности (время ответа API, длительность теста).
+
+### Аналитика
+
+- Используйте скрипты в CI для подсчёта ошибок или анализа трендов.
+- Интегрируйте с Allure для визуализации результатов.
+
+### Отладка
+
+- Проверяйте логи в файлах (`logs/tests.log`, `logs/audit.log`) или в Kibana.
+- Используйте фильтры Logback для проверки маскирования данных.
+
+### Распространённые ошибки
+
+- **Недостаточная детализация**: Пропуск шагов теста в логах усложняет отладку.
+- **Отсутствие контекста**: Логи без MDC затрудняют аудит.
+- **Перегрузка логов**: Избыточные логи мешают аналитике.
+
+## Дополнительно
+
+### Интеграция с Jenkins
+
+Настройте Jenkins для архивирования логов и анализа:
+
+```groovy
+pipeline {
+    agent any
+    stages {
+        stage('Test') {
+            steps {
+                sh 'mvn clean test'
+            }
+        }
+        stage('Analyze Logs') {
+            steps {
+                sh '''
+                    echo "Подсчёт ошибок"
+                    grep -i "ERROR" logs/tests.log | wc -l > error_count.txt
+                    echo "Найдено ошибок: $(cat error_count.txt)"
+                '''
+            }
+        }
+        stage('Allure Report') {
+            steps {
+                allure([
+                    includeProperties: false,
+                    jdk: '',
+                    results: [[path: 'target/allure-results']]
+                ])
+            }
+        }
+    }
+    post {
+        always {
+            archiveArtifacts artifacts: 'logs/*.log', allowEmptyArchive: true
+        }
+    }
+}
+```
+
+### Использование Testcontainers
+
+Testcontainers полезен для проверки интеграции с системами мониторинга логов.
+
+```java
+import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
+
+@Testcontainers
+public class MonitorLogTest {
+    private static final Logger logger = LoggerFactory.getLogger(MonitorLogTest.class);
+
+    @Container
+    private static final GenericContainer<?> logstash = new GenericContainer<>("logstash:8.15.2")
+            .withExposedPorts(5000);
+
+    @Test
+    void testLogMonitoring() {
+        logger.info("Мониторинг: Отправка лога в Logstash на {}:{}", 
+                    logstash.getHost(), logstash.getFirstMappedPort());
+        AuditLogger.logAuditAction("testUser", "Тест мониторинга", "Logstash");
+    }
+}
+```
 ## Преимущества эффективного логирования
 
 - Ускоряет диагностику проблем, снижая время на отладку.
@@ -55,9 +469,14 @@
 - Поддерживает соответствие требованиям аудита и безопасности.
 - Упрощает анализ поведения системы и пользователей.
 
-## Заключение
+## Источники
 
-Логирование — это не просто техническая задача, а стратегический инструмент, обеспечивающий прозрачность, надёжность и безопасность проекта. Чётко определённые цели логирования помогают настроить систему так, чтобы она отвечала потребностям разработки, тестирования и эксплуатации. В следующих шагах можно углубиться в настройку уровней логирования, форматов сообщений и других аспектов.
+- [SLF4J User Manual](http://www.slf4j.org/manual.html)
+- [Logback Documentation](https://logback.qos.ch/documentation.html)
+- [Selenium WebDriver Documentation](https://www.selenium.dev/documentation/webdriver/)
+- [RestAssured Documentation](https://rest-assured.io/)
+- [Allure Framework](https://allurereport.org/docs/)
+- [Testcontainers Documentation](https://testcontainers.org/)
 
 ---
 
