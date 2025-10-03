@@ -21,7 +21,9 @@
 ## Инструменты и практики
 * [Git](./tools/git/README.md)
 * [CI/CD](./tools/ci_cd/README.md)
+* [Логирование](./tools/logging/README.md)
 * [Отчёты Allure](./tools/allure_reports/README.md)
+* [Логирование](./tools/logging/README.md)
 
 ---
 
