@@ -13,7 +13,7 @@
 * [Формат и структура лог-сообщений](./standards/logging_message_format_and_structure.md)
 * [Логирование действий пользователя и системы](./standards/logging_user_actions.md)
 * [Логирование ошибок и исключений](./standards/logging_exceptions.md)
-* [Безопасность логирования (маскирование данных)](./standards/logging_security_data_masking.md)
+* [Безопасность логирования (маскирование данных)](./standards/logging_security.md)
 * [Логирование в тестах и автоматизации](./standards/logging_in_tests_and_automation.md)
 * [Логирование по слоям архитектуры (UI, API, сервисы)](./standards/logging_architecture.md)
 * [Хранилище логов и политика ротации](./standards/log_storage_and_rotation.md)
