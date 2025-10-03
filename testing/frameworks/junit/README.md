@@ -1,4 +1,4 @@
-# Заметки по JUnit
+# JUnit
 
 * [Лучшие практики JUnit 5 AQA Guide](junit5_best_practices_aqa_guide.md)
 * [Функции JUnit 5 Jupiter](junit5_jupiter_functions.md)
