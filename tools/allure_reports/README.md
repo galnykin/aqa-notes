@@ -8,7 +8,7 @@
 * [Интеграция Allure с GitHub Actions](allure_github_actions_integration.md)
 * [Интеграция Allure с Jenkins](allure_jenkins_integration.md)
 
-# Стандарты Allure-репортинга
+## Стандарты Allure-репортинга
 
 * [Цели Allure-репортинга](./standards/allure_reporting_objectives.md)
 * [Структура отчёта: Epic, Feature, Story, Severity](./standards/allure_report_structure.md)
