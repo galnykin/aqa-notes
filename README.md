@@ -22,6 +22,7 @@
 * [Git](./tools/git/README.md)
 * [CI/CD](./tools/ci_cd/README.md)
 * [Отчёты Allure](./tools/allure_reports/README.md)
+* [Логирование](./tools/logging/README.md)
 
 ---
 
