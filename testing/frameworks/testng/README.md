@@ -20,4 +20,4 @@
 * [Параллельный запуск тестов](./standards/parallel_test_execution.md)
 * [Best Practices и антипаттерны](./standards/test_best_practices.md)
 
-[**&#x2190; Назад к оглавлению**](../../../README.md)
+[**&#x2190; Назад к оглавлению**](../README.md)
