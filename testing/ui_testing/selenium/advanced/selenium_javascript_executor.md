@@ -160,4 +160,4 @@ System.out.println("Result: " + duration);
 
 ---
 
-[**← Назад к оглавлению**](../../../../README.md)
+[**← Назад к оглавлению**](../README.md)
