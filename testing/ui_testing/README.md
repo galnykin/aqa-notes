@@ -28,7 +28,8 @@
 * [Параллельный запуск и управление окружением](./standards/parallel_execution_and_environment_management.md)
 * [Best Practices: читаемость, устойчивость, масштабируемость](./standards/best_practices_automation_testing.md)
 
-## Selenium WebDriver
+## Инструменты UI-автоматизации
 * [Selenium](./selenium/README.md)
+* [Selenide](./selenide/README.md)
 
 [**&#x2190; Назад к оглавлению**](../../README.md)
