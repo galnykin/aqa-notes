@@ -1,4 +1,4 @@
-# Фреймворки тестирования
+# Фреймворки
 
 * [JUnit](./junit/README.md)
 * [TestNG](./testng/README.md)
